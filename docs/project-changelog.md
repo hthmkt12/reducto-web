@@ -4,6 +4,12 @@
 
 ### Added
 
+- Initialized separate Payload CMS backend project `reducto-backend` with Cloudflare D1/R2 and Wrangler emulation.
+- Created Payload collections for `site-settings`, `workflow-phases`, `use-cases`, `gap-analyses`, and `schema-templates`.
+- Implemented database seeding script to populate local D1 database with static content.
+- Added custom `/api/reducto-content` API endpoint to Payload config serving structured data.
+- Configured Webpack fallbacks for Node.js core modules in backend Next.js configuration to bypass browser bundling issues.
+- Set up Vercel CLI repository secrets (`VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`) on GitHub to enable dynamic preview smoke tests.
 - Created Reducto React/Vite frontend.
 - Added warm-paper editorial design system: off-white paper, deep plum, magenta CTA, beige borders, minimal shadow.
 - Built hero, phase rail, use case list, gap analysis, and Payload model preview.
@@ -29,7 +35,9 @@
 
 ### Verified
 
-- `npm run build`
+- Verified all 60 Playwright E2E and fallback test cases successfully on the frontend.
+- Verified `/api/reducto-content` endpoint locally on the backend.
+- `npm run build` on both frontend and backend projects.
 - Playwright desktop screenshot at 1200x750.
 - Playwright mobile overflow check at 390x844.
 - Playwright interaction checks for use-case schema updates and phase selection.
