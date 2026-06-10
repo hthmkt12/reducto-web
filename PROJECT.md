@@ -9,14 +9,15 @@
 ```text
 +-----------------------+              +------------------------+
 |   Reducto Frontend    | <--- HTTP -- |  Payload CMS Backend   |
-|     (Next.js App)     |              |     (Node/Express)     |
+|     (Next.js App)     |              |  (Cloudflare Worker)   |
 +-----------------------+              +------------------------+
-            |                                       |
-    (Reads API Env /                                | (PostgreSQL Database)
-     Falls back to local file)                      v
-                                       +------------------------+
-                                       |       PostgreSQL       |
-                                       +------------------------+
+            |                                  |        |
+    (Reads API Env /                           |        | (Media)
+     Falls back to local file)                 v        v
+                                       +-----------+ +----------+
+                                       |    D1     | |    R2    |
+                                       | Database  | | Storage  |
+                                       +-----------+ +----------+
 ```
 
 ## Milestones
@@ -25,7 +26,7 @@
 | 1 | E2E Testing Setup | Initialize E2E test infra and cases (Tiers 1-4), write `TEST_INFRA.md` | None | COMPLETED |
 | 2 | Frontend GitHub/Vercel | Push `F:\Reducto` to `reducto-web` on GitHub; link Vercel | None | IN_PROGRESS |
 | 3 | Preview CI Smoke Tests | Update CI workflow to target Vercel preview URLs | M2 | IN_PROGRESS |
-| 4 | Payload CMS Backend | Initialize `F:\reducto-backend` with local PostgreSQL, define collections, seed, expose `/api/reducto-content` | None | PLANNED |
+| 4 | Payload CMS Backend | Initialize `F:\reducto-backend` using the Payload Cloudflare D1 template (with-cloudflare-d1), define collections, seed, expose `/api/reducto-content` | None | PLANNED |
 | 5 | Frontend Adapter & Fallback | Implement env-based API client with static fallback, verify all tests | M1, M4 | PLANNED |
 | 6 | Final E2E & Hardening | Run all E2E tests, Forensic Auditor, adversarial hardening | M3, M5 | PLANNED |
 
