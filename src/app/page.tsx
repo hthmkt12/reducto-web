@@ -1,5 +1,6 @@
 import App from "../App";
 
 export default function Page() {
-  return <App />;
+  const apiUrl = process.env.REDUCTO_CONTENT_API_URL || "";
+  return <App apiUrl={apiUrl} />;
 }

@@ -180,3 +180,58 @@ export function createStaticReductoContent(): ReductoContent {
     buildPayloadLines,
   };
 }
+
+export function isValidReductoContent(data: any): boolean {
+  if (!data || typeof data !== "object") return false;
+  
+  if (!Array.isArray(data.navItems) || data.navItems.length === 0) return false;
+  for (const item of data.navItems) {
+    if (!item || typeof item.label !== "string" || typeof item.href !== "string") return false;
+  }
+
+  if (!Array.isArray(data.phases) || data.phases.length === 0) return false;
+  for (const item of data.phases) {
+    if (!item || typeof item.index !== "string" || typeof item.label !== "string" || typeof item.summary !== "string") return false;
+  }
+
+  if (!Array.isArray(data.useCases) || data.useCases.length === 0) return false;
+  for (const item of data.useCases) {
+    if (
+      !item ||
+      typeof item.id !== "string" ||
+      typeof item.title !== "string" ||
+      typeof item.audience !== "string" ||
+      typeof item.priority !== "string" ||
+      typeof item.status !== "string" ||
+      typeof item.slug !== "string" ||
+      typeof item.details !== "string" ||
+      typeof item.gap !== "string"
+    ) return false;
+  }
+
+  if (!Array.isArray(data.gapRows)) return false;
+  for (const item of data.gapRows) {
+    if (!item || typeof item.area !== "string" || typeof item.status !== "string" || typeof item.details !== "string") return false;
+  }
+
+  return true;
+}
+
+export async function fetchReductoContent(apiUrl: string): Promise<ReductoContent> {
+  const res = await fetch(apiUrl);
+  if (!res.ok) {
+    throw new Error(`HTTP error ${res.status}`);
+  }
+  const data = await res.json();
+  if (!isValidReductoContent(data)) {
+    throw new Error("Invalid content structure returned from API");
+  }
+  return {
+    navItems: data.navItems,
+    phases: data.phases,
+    useCases: data.useCases,
+    gapRows: data.gapRows,
+    buildPayloadLines,
+  };
+}
+

@@ -28,5 +28,19 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Smoke test production
+      - name: Wait for Vercel Deployment
+        uses: amannn/action-vercel-deployment-status@v2
+        id: vercel_deployment
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-project-id: prj_38LY4iG7RZbLlh2DFhrLu8J6dWoD
+
+      - name: Run Smoke Tests
+        env:
+          SMOKE_BASE_URL: ${{ steps.vercel_deployment.outputs.url }}
         run: npm run test:smoke
+
+      - name: Run E2E Tests
+        env:
+          SMOKE_BASE_URL: ${{ steps.vercel_deployment.outputs.url }}
+        run: npm run test:e2e

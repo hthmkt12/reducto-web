@@ -7,3 +7,7 @@ dist/
 *.tsbuildinfo
 *.log
 .env*
+.agents/
+.claude/
+test-results/
+

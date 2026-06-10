@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test:smoke": "node scripts/smoke-test.cjs",
+    "test:e2e": "playwright test",
     "deploy:vercel": "npx vercel deploy --prod --yes"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

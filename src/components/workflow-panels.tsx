@@ -19,9 +19,9 @@ export function WorkflowPanels({
 }: WorkflowPanelsProps) {
   const selectedUseCase = useMemo<UseCase>(() => {
     return useCases.find((entry) => entry.id === selectedUseCaseId) ?? useCases[0];
-  }, [selectedUseCaseId]);
+  }, [selectedUseCaseId, useCases]);
 
-  const payloadLines = useMemo(() => buildPayloadLines(selectedUseCase.slug), [selectedUseCase.slug]);
+  const payloadLines = useMemo(() => buildPayloadLines(selectedUseCase.slug), [selectedUseCase.slug, buildPayloadLines]);
 
   return (
     <section className="panelGrid" aria-label="Editorial workflow surfaces">
