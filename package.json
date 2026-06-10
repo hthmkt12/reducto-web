@@ -1,0 +1,25 @@
+{
+  "name": "reducto",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test:smoke": "node scripts/smoke-test.cjs",
+    "deploy:vercel": "npx vercel deploy --prod --yes"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "playwright": "^1.60.0",
+    "typescript": "^5.8.3"
+  }
+}
