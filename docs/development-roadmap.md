@@ -1,16 +1,16 @@
 # Development Roadmap
 
-## Phase 0: Editorial Frontend
+## Phase 0: Reducto Frontend
 
 Status: Complete.
 
 - Migrated frontend to Next.js App Router.
-- Implemented warm-paper Reducto homepage.
-- Added interactive use-case selection and Payload schema preview.
-- Added real integrations, docs, and pricing landing sections for all primary nav anchors.
+- Implemented warm-paper Reducto homepage using the magazine-on-warm-paper visual direction.
+- Added interactive industry selection and API capability preview.
+- Added platform, API, industries, and pricing landing sections for all primary nav anchors.
 - Added typed content adapter for future Payload swap.
-- Replaced generic Payload placeholder with collection-specific handoff previews.
-- Added frontend-safe Payload DTO fixtures for documents, policies, audits, clauses, and comparisons.
+- Replaced generic workflow copy with Reducto document AI content for parse, split, extract, edit, and classify.
+- Added frontend-safe API capability fixtures for finance, healthcare, insurance, legal, and operations.
 - Verified desktop and mobile rendering.
 - Deployed to Cloudflare Pages.
 

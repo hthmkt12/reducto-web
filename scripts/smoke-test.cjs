@@ -1,6 +1,6 @@
 const { chromium } = require("playwright");
 
-const baseUrl = process.env.SMOKE_BASE_URL || "https://reducto-weld.vercel.app";
+const baseUrl = process.env.SMOKE_BASE_URL || "https://reducto.pages.dev";
 
 async function assertText(locator, expected, label) {
   const text = (await locator.innerText()).trim();
@@ -23,18 +23,18 @@ async function runDesktopChecks(browser) {
     throw new Error(`Title expected "Reducto", received "${title}".`);
   }
 
-  const h1 = await assertText(page.locator("h1").first(), "Document work starts here.", "H1");
+  const h1 = await assertText(page.locator("h1").first(), "Free your data from documents.", "H1");
 
-  await page.locator("button", { hasText: "Policy Analysis" }).click();
+  await page.locator("button", { hasText: "Healthcare" }).click();
   const codeText = await page.locator(".codeFrame").innerText();
-  if (!codeText.includes("slug: 'policies'")) {
-    throw new Error("Use-case selection did not update the schema preview.");
+  if (!codeText.includes("capability: 'extract'")) {
+    throw new Error("Industry selection did not update the API preview.");
   }
 
-  await page.locator('[aria-label^="04. Patch"]').click();
+  await page.locator('[aria-label^="04. Edit"]').click();
   const phase = await assertText(
     page.locator(".phaseRail__item.is-active .phaseRail__label"),
-    "Patch",
+    "Edit",
     "Active phase",
   );
 

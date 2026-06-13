@@ -30,7 +30,7 @@
   font-size: clamp(2rem, 2.2vw, 3.05rem);
   line-height: 0.9;
   color: var(--ink);
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .topNav__links {
@@ -121,12 +121,16 @@
 
 .heroBand__title {
   margin: 0;
-  max-width: 14ch;
+  max-width: 15ch;
   font-family: var(--display);
-  font-size: clamp(4.2rem, 8.4vw, 7.85rem);
+  font-size: clamp(4.3rem, 8.8vw, 8.5rem);
   line-height: 0.88;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   color: var(--ink);
+}
+
+.heroBand__title span {
+  color: var(--magenta);
 }
 
 .heroBand__aside {
@@ -140,7 +144,7 @@
   font-family: var(--display);
   font-size: clamp(1.7rem, 2.3vw, 2.7rem);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .heroBand__text {

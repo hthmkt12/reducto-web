@@ -42,7 +42,7 @@ test.describe('Tier 2: Boundary & Corner Cases', () => {
 
     test('T2-TopNav-4: Rapid clicks on action buttons do not crash the app', async ({ page }) => {
       await page.goto('/');
-      const demoBtn = page.locator('.topNav__ghost', { hasText: 'Request a demo' });
+      const demoBtn = page.locator('.topNav__ghost', { hasText: 'Contact sales' });
       await demoBtn.click({ clickCount: 5, delay: 50 });
       await expect(page).toHaveURL(/#contact/);
     });

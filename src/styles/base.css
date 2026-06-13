@@ -1,17 +1,17 @@
 :root {
   color-scheme: light;
-  --paper: #faf6ee;
-  --paper-2: #f4ecdf;
-  --paper-3: #efe5d5;
+  --paper: #fafaf9;
+  --paper-2: #f2ede6;
+  --paper-3: #e9dfd2;
   --ink: #310632;
   --ink-soft: rgba(49, 6, 50, 0.76);
   --ink-muted: rgba(49, 6, 50, 0.56);
-  --line: #d7ccc1;
-  --line-soft: rgba(215, 204, 193, 0.7);
+  --line: #d8cabb;
+  --line-soft: rgba(216, 202, 187, 0.7);
   --magenta: #9d17a0;
   --magenta-deep: #7b0d7d;
   --magenta-soft: rgba(157, 23, 160, 0.08);
-  --warm: #a38d74;
+  --warm: #967f66;
   --shadow: 0 0 0 transparent;
   --radius: 3px;
   --container: 1464px;
@@ -33,8 +33,8 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.8), transparent 32%),
-    linear-gradient(180deg, #fbf7f0 0%, var(--paper) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 21rem),
+    var(--paper);
   color: var(--ink);
   font-family: var(--ui);
   text-rendering: optimizeLegibility;
@@ -47,7 +47,7 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(49, 6, 50, 0.06) 0.45px, transparent 0.45px);
+  background-image: radial-gradient(rgba(49, 6, 50, 0.045) 0.45px, transparent 0.45px);
   background-position: 0 0;
   background-size: 7px 7px;
   opacity: 0.16;

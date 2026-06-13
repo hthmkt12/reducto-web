@@ -1,6 +1,6 @@
 # Reducto
 
-Warm-paper editorial frontend for a use-case-driven document workflow. The current app is a static Next.js App Router export deployed to Cloudflare Pages. Backend integration is supported; the UI consumes a typed local content adapter and a narrow frontend-safe API boundary. A local Payload CMS backend app is implemented under `reducto-backend`, and the frontend can optionally consume it via `NEXT_PUBLIC_REDUCTO_CONTENT_API_URL`, `REDUCTO_CONTENT_API_URL`, or fall back to the built-in static content.
+Warm-paper editorial frontend for Reducto, an agentic document platform for AI teams. The current app is a static Next.js App Router export deployed to Cloudflare Pages. The public page presents Reducto's parse, split, extract, edit, and classify capabilities with a magazine-on-warm-paper visual system.
 
 ## Live
 
@@ -34,23 +34,23 @@ npm run deploy:cloudflare
 
 `npm run deploy:cloudflare` builds and deploys `out/` to the Cloudflare Pages project `reducto`.
 
-## Payload Boundary
+## Content Boundary
 
-Payload CMS is implemented as a separate backend app under `reducto-backend`. Keep this frontend consuming data through `src/data/reducto-content.ts` and frontend-safe DTO modules instead of importing Payload server code into browser components.
+Keep this frontend consuming public site data through `src/data/reducto-content.ts` and frontend-safe DTO modules. Do not import backend/server code into browser components.
 
-The frontend handoff surface maps collection-specific previews for `documents`, `policies`, `audits`, `clauses`, and `comparisons` in `src/data/payload-handoff.ts`. These previews show the collection configurations, fields, relationships, ownership, and workflow states from the backend.
+The frontend preview surface maps product capabilities for `parse`, `split`, `extract`, `edit`, and `classify` in `src/data/payload-handoff.ts`. The file name is legacy, but the public copy now represents Reducto API capabilities instead of CMS collection marketing.
 
 Integration architecture:
 
 ```text
-Reducto frontend repo/app -> HTTP Fetch / api/reducto-content -> separate Payload backend app (reducto-backend)
+Reducto frontend repo/app -> HTTP Fetch / api/reducto-content -> optional content backend
 ```
 
-The backend is a standalone application in the `reducto-backend/` directory, designed to deploy independently from the landing page.
+The backend is a standalone application in the `reducto-backend/` directory, designed to deploy independently from the landing page if dynamic content is needed.
 
-## Local Development with Payload Backend
+## Local Development with Content Backend
 
-To run the frontend integrated with the local Payload CMS backend:
+To run the frontend integrated with the local backend:
 
 1. Start the Payload backend server (e.g., on port 3001):
    ```bash
