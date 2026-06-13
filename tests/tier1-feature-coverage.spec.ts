@@ -12,9 +12,9 @@ test.describe('Tier 1: Feature Coverage', () => {
     test('T1-TopNav-1: Render navigation items list correctly', async ({ page }) => {
       const links = page.locator('.topNav__link');
       await expect(links).toHaveCount(4);
-      await expect(links.nth(0)).toHaveText('Use Case Driven Workflow');
-      await expect(links.nth(1)).toHaveText('Integrations');
-      await expect(links.nth(2)).toHaveText('Docs');
+      await expect(links.nth(0)).toHaveText('Platform');
+      await expect(links.nth(1)).toHaveText('API');
+      await expect(links.nth(2)).toHaveText('Industries');
       await expect(links.nth(3)).toHaveText('Pricing');
     });
 
@@ -25,20 +25,20 @@ test.describe('Tier 1: Feature Coverage', () => {
       await expect(page).toHaveURL(/#top/);
     });
 
-    test('T1-TopNav-3: Click Use Case Driven Workflow goes to workflow anchor', async ({ page }) => {
-      const workflowLink = page.locator('.topNav__link', { hasText: 'Use Case Driven Workflow' });
+    test('T1-TopNav-3: Click Platform goes to workflow anchor', async ({ page }) => {
+      const workflowLink = page.locator('.topNav__link', { hasText: 'Platform' });
       await workflowLink.click();
       await expect(page).toHaveURL(/#workflow/);
     });
 
-    test('T1-TopNav-4: Click Request a demo triggers navigation to contact anchor', async ({ page }) => {
-      const contactLink = page.locator('.topNav__ghost', { hasText: 'Request a demo' });
+    test('T1-TopNav-4: Click Contact sales triggers navigation to contact anchor', async ({ page }) => {
+      const contactLink = page.locator('.topNav__ghost', { hasText: 'Contact sales' });
       await contactLink.click();
       await expect(page).toHaveURL(/#contact/);
     });
 
-    test('T1-TopNav-5: Click Try for free triggers navigation to use-cases anchor', async ({ page }) => {
-      const useCasesLink = page.locator('.topNav__primary', { hasText: 'Try for free' });
+    test('T1-TopNav-5: Click Try your own triggers navigation to use-cases anchor', async ({ page }) => {
+      const useCasesLink = page.locator('.topNav__primary', { hasText: 'Try your own' });
       await useCasesLink.click();
       await expect(page).toHaveURL(/#use-cases/);
     });
@@ -52,7 +52,7 @@ test.describe('Tier 1: Feature Coverage', () => {
     test('T1-PhaseRail-1: Display 5 workflow phases with correct indices and labels', async ({ page }) => {
       const phaseItems = page.locator('.phaseRail__item');
       await expect(phaseItems).toHaveCount(5);
-      const labels = ['Brief', 'Build', 'Check', 'Patch', 'Expand'];
+      const labels = ['Parse', 'Split', 'Extract', 'Edit', 'Classify'];
       for (let i = 0; i < 5; i++) {
         await expect(phaseItems.nth(i).locator('.phaseRail__index')).toHaveText(`0${i + 1}`);
         await expect(phaseItems.nth(i).locator('.phaseRail__label')).toHaveText(labels[i]);
@@ -66,11 +66,11 @@ test.describe('Tier 1: Feature Coverage', () => {
       await expect(phase2).toHaveClass(/is-active/);
     });
 
-    test('T1-PhaseRail-3: Select phase 4 (Patch) updates summaries and descriptions', async ({ page }) => {
-      const phase4 = page.locator('.phaseRail__item').nth(3); // Patch
+    test('T1-PhaseRail-3: Select phase 4 (Edit) updates summaries and descriptions', async ({ page }) => {
+      const phase4 = page.locator('.phaseRail__item').nth(3); // Edit
       await phase4.click();
       await expect(phase4).toHaveClass(/is-active/);
-      await expect(phase4.locator('.phaseRail__summary')).toHaveText('Resolve gaps and refine content, schema, and relationships.');
+      await expect(phase4.locator('.phaseRail__summary')).toHaveText('Fill blanks, tables, and checkboxes without brittle templates.');
     });
 
     test('T1-PhaseRail-4: Change page URL hash updates active phase', async ({ page }) => {
@@ -99,39 +99,39 @@ test.describe('Tier 1: Feature Coverage', () => {
     test('T1-UseCases-1: Render list of 5 static use cases', async ({ page }) => {
       const rows = page.locator('.panelCard--useCases .panelList__row');
       await expect(rows).toHaveCount(5);
-      await expect(rows.nth(0).locator('strong')).toHaveText('Contract Review');
-      await expect(rows.nth(1).locator('strong')).toHaveText('Policy Analysis');
-      await expect(rows.nth(2).locator('strong')).toHaveText('Compliance Check');
-      await expect(rows.nth(3).locator('strong')).toHaveText('Clause Extraction');
-      await expect(rows.nth(4).locator('strong')).toHaveText('Document Comparison');
+      await expect(rows.nth(0).locator('strong')).toHaveText('Finance');
+      await expect(rows.nth(1).locator('strong')).toHaveText('Healthcare');
+      await expect(rows.nth(2).locator('strong')).toHaveText('Insurance');
+      await expect(rows.nth(3).locator('strong')).toHaveText('Legal');
+      await expect(rows.nth(4).locator('strong')).toHaveText('Operations');
     });
 
     test('T1-UseCases-2: First use case is selected by default', async ({ page }) => {
       const rows = page.locator('.panelCard--useCases .panelList__row');
       await expect(rows.nth(0)).toHaveClass(/is-active/);
       const codeFrame = page.locator('.codeFrame');
-      await expect(codeFrame).toContainText("slug: 'documents'");
+      await expect(codeFrame).toContainText("capability: 'parse'");
     });
 
     test('T1-UseCases-3: Clicking a use case updates the details panel', async ({ page }) => {
       const rows = page.locator('.panelCard--useCases .panelList__row');
-      await rows.nth(1).click(); // Policy Analysis
+      await rows.nth(1).click(); // Healthcare
       await expect(rows.nth(1)).toHaveClass(/is-active/);
       await expect(rows.nth(0)).not.toHaveClass(/is-active/);
     });
 
-    test('T1-UseCases-4: Selecting a use case updates the Payload model code preview', async ({ page }) => {
+    test('T1-UseCases-4: Selecting a use case updates the API preview', async ({ page }) => {
       const rows = page.locator('.panelCard--useCases .panelList__row');
-      await rows.nth(2).click(); // Compliance Check
+      await rows.nth(2).click(); // Insurance
       const codeFrame = page.locator('.codeFrame');
-      await expect(codeFrame).toContainText("slug: 'audits'");
+      await expect(codeFrame).toContainText("capability: 'split'");
     });
 
     test('T1-UseCases-5: Verify current focus metadata chip text matches selection', async ({ page }) => {
       const rows = page.locator('.panelCard--useCases .panelList__row');
-      await rows.nth(3).click(); // Clause Extraction
+      await rows.nth(3).click(); // Legal
       const metaChip = page.locator('.panelCard__metaChip');
-      await expect(metaChip).toHaveText('Current focus: Clause Extraction');
+      await expect(metaChip).toHaveText('Current focus: Legal');
     });
   });
 
@@ -154,23 +154,23 @@ test.describe('Tier 1: Feature Coverage', () => {
 
     test('T1-Gap-3: Verify statuses for gap rows match spec values', async ({ page }) => {
       const rows = page.locator('.gapTable__row');
-      await expect(rows.nth(0).locator('.gapTable__status')).toHaveText('Open');
-      await expect(rows.nth(1).locator('.gapTable__status')).toHaveText('Open');
-      await expect(rows.nth(2).locator('.gapTable__status')).toHaveText('In progress');
-      await expect(rows.nth(3).locator('.gapTable__status')).toHaveText('Open');
-      await expect(rows.nth(4).locator('.gapTable__status')).toHaveText('In progress');
+      await expect(rows.nth(0).locator('.gapTable__status')).toHaveText('3B+');
+      await expect(rows.nth(1).locator('.gapTable__status')).toHaveText('Unified');
+      await expect(rows.nth(2).locator('.gapTable__status')).toHaveText('Agentic');
+      await expect(rows.nth(3).locator('.gapTable__status')).toHaveText('Precise');
+      await expect(rows.nth(4).locator('.gapTable__status')).toHaveText('Trusted');
     });
 
     test('T1-Gap-4: Verify gap row area texts are correct', async ({ page }) => {
       const rows = page.locator('.gapTable__row');
-      await expect(rows.nth(0).locator('span[role="cell"]').first()).toHaveText('Metadata');
-      await expect(rows.nth(1).locator('span[role="cell"]').first()).toHaveText('Relationships');
+      await expect(rows.nth(0).locator('span[role="cell"]').first()).toHaveText('Pages processed');
+      await expect(rows.nth(1).locator('span[role="cell"]').first()).toHaveText('Input types');
     });
 
     test('T1-Gap-5: Verify gap row details texts are correct', async ({ page }) => {
       const rows = page.locator('.gapTable__row');
-      await expect(rows.nth(0).locator('span[role="cell"]').nth(2)).toHaveText('Missing fields in 3 models');
-      await expect(rows.nth(1).locator('span[role="cell"]').nth(2)).toHaveText('2 weak links detected');
+      await expect(rows.nth(0).locator('span[role="cell"]').nth(2)).toHaveText('Production-scale document volume');
+      await expect(rows.nth(1).locator('span[role="cell"]').nth(2)).toHaveText('PDFs, images, spreadsheets, slides');
     });
   });
 
@@ -220,9 +220,9 @@ test.describe('Tier 1: Feature Coverage', () => {
     test('T1-Adapter-1: Falls back to static content when apiUrl is unset', async ({ page }) => {
       await page.goto('/');
       const links = page.locator('.topNav__link');
-      await expect(links.first()).toHaveText('Use Case Driven Workflow');
+      await expect(links.first()).toHaveText('Platform');
       const rows = page.locator('.panelCard--useCases .panelList__row');
-      await expect(rows.first().locator('strong')).toHaveText('Contract Review');
+      await expect(rows.first().locator('strong')).toHaveText('Finance');
     });
 
     test('T1-Adapter-2: Falls back to static content when api is unreachable (HTTP 500/network error)', async ({ page }) => {
@@ -233,9 +233,9 @@ test.describe('Tier 1: Feature Coverage', () => {
 
       await page.goto('/?apiUrl=/api/broken-content');
       const links = page.locator('.topNav__link');
-      await expect(links.first()).toHaveText('Use Case Driven Workflow');
+      await expect(links.first()).toHaveText('Platform');
       const rows = page.locator('.panelCard--useCases .panelList__row');
-      await expect(rows.first().locator('strong')).toHaveText('Contract Review');
+      await expect(rows.first().locator('strong')).toHaveText('Finance');
     });
 
     test('T1-Adapter-3: Successfully fetches content when REDUCTO_CONTENT_API_URL is set and reachable', async ({ page }) => {
@@ -278,7 +278,7 @@ test.describe('Tier 1: Feature Coverage', () => {
       const useCaseRows = page.locator('.panelCard--useCases .panelList__row');
       await expect(useCaseRows.first()).toHaveClass(/is-active/);
       const codeFrame = page.locator('.codeFrame');
-      await expect(codeFrame).toContainText("slug: 'dyn-slug-1'");
+      await expect(codeFrame).toContainText("capability: 'dyn-slug-1'");
     });
 
     test('T1-Adapter-5: Hash change works normally with loaded dynamic content', async ({ page }) => {

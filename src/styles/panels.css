@@ -28,7 +28,7 @@
   font-family: var(--display);
   font-size: clamp(2rem, 2.1vw, 2.5rem);
   line-height: 0.95;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   font-weight: 600;
 }
 
@@ -87,7 +87,7 @@
 .panelList__rowCopy strong {
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .panelList__rowCopy span {

@@ -46,7 +46,7 @@ export function TopNav({ navItems, onJump }: TopNavProps): JSX.Element {
               onJump?.("#contact");
             }}
           >
-            Request a demo
+            Contact sales
           </a>
           <a
             className="topNav__primary"
@@ -56,7 +56,7 @@ export function TopNav({ navItems, onJump }: TopNavProps): JSX.Element {
               onJump?.("#use-cases");
             }}
           >
-            Try for free
+            Try your own
           </a>
         </div>
       </div>

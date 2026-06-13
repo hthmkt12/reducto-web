@@ -115,11 +115,11 @@
   }
 
   .phaseRail__item {
-    min-height: 5.8rem;
+    min-height: 7.3rem;
   }
 
   .phaseRail__item.is-active .phaseRail__summary {
-    max-height: 5.5rem;
+    max-height: 7rem;
   }
 
   .phaseRail__arrow {

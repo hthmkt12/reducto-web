@@ -9,6 +9,9 @@
 - Documented local backend run commands, environment variable usage, and smoke testing in README files.
 
 ### Changed
+- Redesigned the frontend copy around Reducto's document AI platform: parse, split, extract, edit, classify, and industry use cases.
+- Reworked the public API preview from CMS/Payload-oriented copy to Reducto capability-oriented copy.
+- Adjusted warm-paper magazine tokens toward the Refero prompt: off-white canvas, deep plum ink, rationed magenta, paper-thin borders, and no visible elevation.
 - Migrated the frontend deployment target from Vercel to Cloudflare Pages static export.
 - Updated CI to verify the built `out/` artifact through Cloudflare Pages local dev and deploy to Cloudflare Pages from `main` when Cloudflare secrets are present.
 - Added `NEXT_PUBLIC_REDUCTO_CONTENT_API_URL` support for frontend-safe static deployments.

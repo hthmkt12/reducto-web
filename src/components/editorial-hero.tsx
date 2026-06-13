@@ -14,27 +14,26 @@ export function EditorialHero({
       <div className="heroBand__inner">
         <div className="heroBand__copy">
           <h1 id="hero-title" className="heroBand__title">
-            Document work starts here.
+            Free your data from <span>documents.</span>
           </h1>
         </div>
 
         <aside className="heroBand__aside">
-          <p className="heroBand__eyebrow">Use Case Driven Workflow</p>
+          <p className="heroBand__eyebrow">Agentic document platform</p>
           <p className="heroBand__text">
-            A structured approach that turns real document work into reliable outcomes.
-            From brief to expansion, every step is intentional, traceable, and built to
-            evolve.
+            Parse, split, extract, edit, and classify complex documents with a
+            layout-aware system built for AI teams that need reliable structured output.
           </p>
         </aside>
       </div>
 
       <div className="heroBand__ctaRow">
         <button className="heroBand__button heroBand__button--primary" type="button" onClick={onReviewWorkflow}>
-          Review workflow
+          Explore platform
           <ArrowRightIcon size={18} />
         </button>
         <button className="heroBand__button" type="button" onClick={onOpenSchema}>
-          Open schema
+          View API
         </button>
       </div>
     </section>

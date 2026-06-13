@@ -160,8 +160,8 @@ export default function App({ apiUrl }: { apiUrl?: string }) {
         <section className="supportBand" aria-label="Editorial summary">
           <div className="supportBand__line" />
           <p className="supportBand__copy">
-            Warm paper surfaces, disciplined type, and a Payload-ready content model keep
-            editorial work readable before the backend exists.
+            Over 3,000,000,000 pages processed for teams that need documents turned into
+            structured, reliable AI inputs.
           </p>
         </section>
 

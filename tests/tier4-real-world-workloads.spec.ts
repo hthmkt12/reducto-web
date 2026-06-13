@@ -7,10 +7,10 @@ test.describe('Tier 4: Real-world Workloads', () => {
     
     // 1. User arrives at landing page
     await expect(page).toHaveTitle('Reducto');
-    await expect(page.locator('h1').first()).toHaveText('Document work starts here.');
+    await expect(page.locator('h1').first()).toHaveText('Free your data from documents.');
     
-    // 2. User clicks "Review workflow" in hero
-    const heroWorkflowBtn = page.locator('.heroBand .heroBand__button--primary', { hasText: 'Review workflow' });
+    // 2. User clicks "Explore platform" in hero
+    const heroWorkflowBtn = page.locator('.heroBand .heroBand__button--primary', { hasText: 'Explore platform' });
     await heroWorkflowBtn.click();
     await expect(page).toHaveURL(/#workflow/);
     
@@ -23,19 +23,19 @@ test.describe('Tier 4: Real-world Workloads', () => {
     
     // 4. User clicks through each usecase to examine details
     const useCases = page.locator('.panelCard--useCases .panelList__row');
-    const expectedSlugs = ['documents', 'policies', 'audits', 'clauses', 'comparisons'];
+    const expectedCapabilities = ['parse', 'extract', 'split', 'classify', 'edit'];
     for (let i = 0; i < 5; i++) {
       await useCases.nth(i).click();
       await expect(useCases.nth(i)).toHaveClass(/is-active/);
-      await expect(page.locator('.codeFrame')).toContainText(`slug: '${expectedSlugs[i]}'`);
+      await expect(page.locator('.codeFrame')).toContainText(`capability: '${expectedCapabilities[i]}'`);
     }
 
     // 5. User inspects gap table
     const gapRows = page.locator('.gapTable__row');
     await expect(gapRows).toHaveCount(5);
 
-    // 6. User decides to try for free
-    const tryFreeBtn = page.locator('.topNav__primary', { hasText: 'Try for free' });
+    // 6. User decides to try their own document
+    const tryFreeBtn = page.locator('.topNav__primary', { hasText: 'Try your own' });
     await tryFreeBtn.click();
     await expect(page).toHaveURL(/#use-cases/);
   });
@@ -44,18 +44,18 @@ test.describe('Tier 4: Real-world Workloads', () => {
     // User lands on specific hash `#patch`
     await page.goto('/#patch');
     
-    // Verify patch phase is active
+    // Verify edit phase is active
     const phase4 = page.locator('.phaseRail__item').nth(3);
     await expect(phase4).toHaveClass(/is-active/);
-    await expect(phase4.locator('.phaseRail__label')).toHaveText('Patch');
+    await expect(phase4.locator('.phaseRail__label')).toHaveText('Edit');
 
-    // Select "Clause Extraction"
-    const clauseUc = page.locator('strong', { hasText: 'Clause Extraction' });
+    // Select "Legal"
+    const clauseUc = page.locator('strong', { hasText: 'Legal' });
     await clauseUc.click();
-    await expect(page.locator('.codeFrame')).toContainText("slug: 'clauses'");
+    await expect(page.locator('.codeFrame')).toContainText("capability: 'classify'");
 
-    // Click request a demo
-    const demoBtn = page.locator('.topNav__ghost', { hasText: 'Request a demo' });
+    // Click contact sales
+    const demoBtn = page.locator('.topNav__ghost', { hasText: 'Contact sales' });
     await demoBtn.click();
     await expect(page).toHaveURL(/#contact/);
   });
@@ -102,7 +102,7 @@ test.describe('Tier 4: Real-world Workloads', () => {
     await expect(ucRows).toHaveCount(2);
     await ucRows.nth(1).click();
     await expect(ucRows.nth(1)).toHaveClass(/is-active/);
-    await expect(page.locator('.codeFrame')).toContainText("slug: 'sec-slug'");
+    await expect(page.locator('.codeFrame')).toContainText("capability: 'sec-slug'");
 
     // Check gap analysis table
     const gapRows = page.locator('.gapTable__row');
@@ -127,7 +127,7 @@ test.describe('Tier 4: Real-world Workloads', () => {
     // Verify final consistent state
     await expect(phases.nth(0)).toHaveClass(/is-active/);
     await expect(useCases.nth(4)).toHaveClass(/is-active/);
-    await expect(page.locator('.codeFrame')).toContainText("slug: 'comparisons'");
+    await expect(page.locator('.codeFrame')).toContainText("capability: 'edit'");
   });
 
   test('T4-Workload-5: API Failure Recovery Flow', async ({ page }) => {
@@ -141,14 +141,14 @@ test.describe('Tier 4: Real-world Workloads', () => {
 
     // 3. Page must fall back gracefully to static content
     const links = page.locator('.topNav__link');
-    await expect(links.first()).toHaveText('Use Case Driven Workflow');
+    await expect(links.first()).toHaveText('Platform');
     const firstUc = page.locator('.panelCard--useCases .panelList__row').first();
-    await expect(firstUc.locator('strong')).toHaveText('Contract Review');
+    await expect(firstUc.locator('strong')).toHaveText('Finance');
 
     // 4. Interaction should work perfectly with static fallback content
-    const secondUc = page.locator('button', { hasText: 'Policy Analysis' });
+    const secondUc = page.locator('button', { hasText: 'Healthcare' });
     await secondUc.click();
     await expect(secondUc).toHaveClass(/is-active/);
-    await expect(page.locator('.codeFrame')).toContainText("slug: 'policies'");
+    await expect(page.locator('.codeFrame')).toContainText("capability: 'extract'");
   });
 });

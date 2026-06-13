@@ -19,7 +19,7 @@ const ui = Inter({
 export const metadata: Metadata = {
   title: "Reducto",
   description:
-    "A warm-paper editorial workflow for use-case driven document systems, ready for a future Payload CMS boundary.",
+    "A warm-paper editorial site for Reducto, the agentic document platform for AI teams.",
 };
 
 type RootLayoutProps = {

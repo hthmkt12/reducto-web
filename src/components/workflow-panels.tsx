@@ -32,18 +32,18 @@ export function WorkflowPanels({
   }, [buildPayloadLines, selectedUseCase.slug]);
 
   return (
-    <section className="panelGrid" aria-label="Editorial workflow surfaces">
+    <section className="panelGrid" aria-label="Document intelligence surfaces">
       <article className="panelCard panelCard--useCases" id="use-cases">
         <div className="panelCard__head">
           <div>
-            <h2 className="panelCard__title">Use Cases</h2>
+            <h2 className="panelCard__title">Industries</h2>
             <p className="panelCard__subtitle">
-              Define what your content needs to do, for whom, and in which contexts.
+              Trusted where accuracy matters: finance, healthcare, insurance, legal, and more.
             </p>
           </div>
           <a className="panelCard__action" href="#docs">
             <span>+</span>
-            Add use case
+            Explore
           </a>
         </div>
 
@@ -69,7 +69,7 @@ export function WorkflowPanels({
         </div>
 
         <a className="panelCard__footerLink" href="#docs">
-          View all use cases
+          View industries
           <ChevronRightIcon size={14} />
         </a>
       </article>
@@ -77,18 +77,18 @@ export function WorkflowPanels({
       <article className="panelCard panelCard--gap">
         <div className="panelCard__head">
           <div>
-            <h2 className="panelCard__title">Gap Analysis</h2>
+            <h2 className="panelCard__title">Proof Points</h2>
             <p className="panelCard__subtitle">
-              Identify what is missing between current content and use case needs.
+              A compact read on where Reducto earns trust before the API call.
             </p>
           </div>
           <a className="panelCard__action" href="#docs">
             <span>+</span>
-            Add gap
+            Details
           </a>
         </div>
 
-        <div className="gapTable" role="table" aria-label="Gap analysis">
+        <div className="gapTable" role="table" aria-label="Proof points">
           <div className="gapTable__head" role="row">
             <span role="columnheader">Area</span>
             <span role="columnheader">Status</span>
@@ -110,7 +110,7 @@ export function WorkflowPanels({
         </div>
 
         <a className="panelCard__footerLink" href="#workflow">
-          View all gaps
+          View platform
           <ChevronRightIcon size={14} />
         </a>
       </article>
@@ -118,21 +118,21 @@ export function WorkflowPanels({
       <article className="panelCard panelCard--code" id="schema">
         <div className="panelCard__head">
           <div>
-            <h2 className="panelCard__title">Payload Model</h2>
+            <h2 className="panelCard__title">API Surface</h2>
             <p className="panelCard__subtitle">
-              Payload-ready content model aligned to your selected use case.
+              Frontend-safe preview of the document capability behind the selected industry.
             </p>
           </div>
-          <a className="panelCard__action panelCard__action--icon" href="#schema" aria-label="Open schema">
+          <a className="panelCard__action panelCard__action--icon" href="#schema" aria-label="Open API">
             <CodeIcon size={18} />
           </a>
         </div>
 
         {selectedPreview ? (
-          <div className="schemaBrief" aria-label={`Payload handoff details for ${selectedPreview.label}`}>
+          <div className="schemaBrief" aria-label={`API details for ${selectedPreview.label}`}>
             <div className="schemaBrief__row">
-              <span>Collection</span>
-              <strong>{selectedPreview.slug}</strong>
+              <span>Capability</span>
+              <strong>{selectedPreview.label}</strong>
             </div>
             <div className="schemaBrief__row">
               <span>Endpoint</span>
@@ -163,7 +163,7 @@ export function WorkflowPanels({
           </div>
         ) : null}
 
-        <div className="codeFrame" aria-label={`Payload model for ${selectedUseCase.title}`}>
+        <div className="codeFrame" aria-label={`API preview for ${selectedUseCase.title}`}>
           <div className="codeFrame__lines">
             {payloadLines.map((line, index) => (
               <div className="codeFrame__line" key={`${line}-${index}`}>
@@ -177,7 +177,7 @@ export function WorkflowPanels({
         <div className="panelCard__metaRow">
           <span className="panelCard__metaChip">Current focus: {selectedUseCase.title}</span>
           <span className="panelCard__metaHint">
-            {selectedPreview ? `Relations: ${selectedPreview.relationships.join(", ")}` : "Ready to connect to Payload CMS"}
+            {selectedPreview ? `Returns: ${selectedPreview.relationships.join(", ")}` : "Ready for document AI"}
           </span>
         </div>
       </article>

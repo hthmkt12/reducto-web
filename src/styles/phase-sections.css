@@ -61,7 +61,7 @@
   font-family: var(--display);
   font-size: clamp(2.4rem, 4vw, 4.35rem);
   line-height: 0.95;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   font-weight: 600;
 }
 
