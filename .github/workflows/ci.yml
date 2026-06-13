@@ -56,12 +56,12 @@ jobs:
           SMOKE_BASE_URL: ${{ steps.deploy.outputs.url }}
         run: npm run test:e2e
 
-      - name: Run Local Smoke Tests
+      - name: Run Local Smoke and E2E Tests
         if: steps.vercel-pull.outcome != 'success'
         run: |
           npx next start -p 48329 &
           SERVER_PID=$!
-          trap "kill $SERVER_PID" EXIT
+          trap "kill $SERVER_PID || true" EXIT
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:48329 >/dev/null; then
               break
@@ -69,7 +69,4 @@ jobs:
             sleep 1
           done
           SMOKE_BASE_URL=http://127.0.0.1:48329 npm run test:smoke
-
-      - name: Run Local E2E Tests
-        if: steps.vercel-pull.outcome != 'success'
-        run: npm run test:e2e
+          SMOKE_BASE_URL=http://127.0.0.1:48329 npm run test:e2e
