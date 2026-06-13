@@ -1,11 +1,10 @@
 # Reducto
 
-Warm-paper editorial frontend for a use-case-driven document workflow. The current app is a Next.js App Router build deployed to Vercel. Backend integration is supported; the UI consumes a typed local content adapter and a narrow frontend-safe API boundary. A local Payload CMS backend app is implemented under `reducto-backend`, and the frontend can optionally consume it via `REDUCTO_CONTENT_API_URL` or fall back to the built-in static content.
+Warm-paper editorial frontend for a use-case-driven document workflow. The current app is a static Next.js App Router export deployed to Cloudflare Pages. Backend integration is supported; the UI consumes a typed local content adapter and a narrow frontend-safe API boundary. A local Payload CMS backend app is implemented under `reducto-backend`, and the frontend can optionally consume it via `NEXT_PUBLIC_REDUCTO_CONTENT_API_URL`, `REDUCTO_CONTENT_API_URL`, or fall back to the built-in static content.
 
 ## Live
 
-- Production: https://reducto-weld.vercel.app
-- Latest deployment from this run: https://reducto-e9ke2p6xq-tiximaxs-projects.vercel.app
+- Production: https://reducto.pages.dev
 
 ## Stack
 
@@ -13,7 +12,7 @@ Warm-paper editorial frontend for a use-case-driven document workflow. The curre
 - React 19
 - TypeScript
 - CSS-first warm-paper design system
-- Vercel
+- Cloudflare Pages
 - GitHub Actions-ready CI
 
 ## Scripts
@@ -23,12 +22,17 @@ npm run dev
 npm run build
 npm run start
 npm run test:smoke
-npm run deploy:vercel
+npm run preview:cloudflare
+npm run deploy:cloudflare
 ```
+
+`npm run build` writes the static production artifact to `out/`.
+
+`npm run start` serves the existing `out/` directory with Cloudflare Pages local dev on port 3000. Run `npm run build` first if `out/` does not exist.
 
 `npm run test:smoke` checks the production URL by default. To test a local server, run it with `SMOKE_BASE_URL=http://localhost:3000`.
 
-`npm run deploy:vercel` assumes the workspace is linked to a Vercel project. For a fresh clone, run `npx vercel link` first and choose a lowercase project name such as `reducto`.
+`npm run deploy:cloudflare` builds and deploys `out/` to the Cloudflare Pages project `reducto`.
 
 ## Payload Boundary
 
@@ -61,10 +65,10 @@ To run the frontend integrated with the local Payload CMS backend:
 2. Start the frontend with the backend API URL:
    ```bash
    # Set the environment variable:
-   $env:REDUCTO_CONTENT_API_URL="http://localhost:3001/api/reducto-content"
+   $env:NEXT_PUBLIC_REDUCTO_CONTENT_API_URL="http://localhost:3001/api/reducto-content"
    npm run dev
    ```
-   If `REDUCTO_CONTENT_API_URL` is omitted, or if the API fetch fails/is invalid, the frontend automatically falls back to the local static content defined in `src/data/reducto-static-content.ts`.
+   If `NEXT_PUBLIC_REDUCTO_CONTENT_API_URL` and `REDUCTO_CONTENT_API_URL` are omitted, or if the API fetch fails/is invalid, the frontend automatically falls back to the local static content defined in `src/data/reducto-static-content.ts`.
 
 3. Run backend API contract smoke tests:
    ```bash
@@ -78,9 +82,8 @@ This repo includes a GitHub Actions workflow at `.github/workflows/ci.yml`. It r
 
 - `npm ci`
 - `npm run build`
-- `npm run test:smoke`
-
-The repo currently has no GitHub remote configured, so CI will activate after a remote repository is created and pushed.
+- local Cloudflare Pages smoke and E2E tests against `out/`
+- production Cloudflare Pages deploy on pushes to `main` when `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are configured
 
 ## Open Questions
 

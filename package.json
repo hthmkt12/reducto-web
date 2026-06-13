@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx --yes wrangler pages dev out --port 3000 --ip 127.0.0.1",
     "test:smoke": "node scripts/smoke-test.cjs",
     "test:e2e": "playwright test",
-    "deploy:vercel": "npx vercel deploy --prod --yes"
+    "preview:cloudflare": "npm run build && npx --yes wrangler pages dev out --port 8788 --ip 127.0.0.1",
+    "deploy:cloudflare": "npm run build && npx --yes wrangler pages deploy out --project-name reducto --branch main"
   },
   "dependencies": {
     "next": "^16.2.9",

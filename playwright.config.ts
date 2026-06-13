@@ -20,7 +20,7 @@ export default defineConfig({
     },
   ],
   webServer: process.env.SMOKE_BASE_URL ? undefined : {
-    command: 'npx next start -p 48329',
+    command: 'npm run build && npx --yes wrangler pages dev out --port 48329 --ip 127.0.0.1',
     url: 'http://localhost:48329',
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',

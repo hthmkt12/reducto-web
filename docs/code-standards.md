@@ -4,7 +4,7 @@
 
 - Keep components focused and compositional.
 - Keep code files under 200 lines where practical.
-- Use Next.js App Router for routing, metadata, static rendering, and deployment compatibility with Vercel.
+- Use Next.js App Router for routing, metadata, static rendering, and Cloudflare Pages static export compatibility.
 - Keep client components narrow; add `"use client"` only where browser state or DOM APIs are required.
 - Use `src/data` for typed seed content and future API-shaped adapters.
 - Keep large static seed arrays in dedicated data modules when the adapter would otherwise grow past practical review size.
