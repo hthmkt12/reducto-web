@@ -7,19 +7,22 @@ Status: Complete.
 - Migrated frontend to Next.js App Router.
 - Implemented warm-paper Reducto homepage.
 - Added interactive use-case selection and Payload schema preview.
+- Added real integrations, docs, and pricing landing sections for all primary nav anchors.
 - Added typed content adapter for future Payload swap.
+- Replaced generic Payload placeholder with collection-specific handoff previews.
+- Added frontend-safe Payload DTO fixtures for documents, policies, audits, clauses, and comparisons.
 - Verified desktop and mobile rendering.
 - Deployed to Vercel.
 
 ## Phase 1: Payload Backend
 
-Status: Planned.
+Status: Complete (Verified on localhost).
 
-- Add Payload CMS as a separate backend app.
-- Define collections for documents, policies, audits, clauses, and comparisons.
-- Expose frontend-safe REST or GraphQL data access.
-- Add auth and access rules before editorial writes.
-- Keep the frontend consuming the existing `ReductoContent` contract.
+- Added Payload CMS as a separate backend app under `reducto-backend/`.
+- Defined collections for site settings, workflow phases, use cases, gap analyses, schema templates, and documents, policies, audits, clauses, comparisons.
+- Implemented `/api/reducto-content` endpoint mapping the local/dynamic collection structures into the frontend-safe DTO contract (`ReductoContent`).
+- Configured local development database bindings (Cloudflare D1/R2) via Wrangler proxy mocks.
+- Added backend API contract smoke tests and frontend environment switch with static fallback for local integration.
 
 ## Phase 1A: Repository And CI
 

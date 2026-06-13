@@ -1,4 +1,3 @@
-import { MenuIcon } from "./icons";
 import type { JSX } from "react";
 import type { NavItem } from "../data/reducto-content";
 
@@ -59,9 +58,6 @@ export function TopNav({ navItems, onJump }: TopNavProps): JSX.Element {
           >
             Try for free
           </a>
-          <button className="topNav__menu" type="button" aria-label="Open menu">
-            <MenuIcon size={20} />
-          </button>
         </div>
       </div>
     </header>

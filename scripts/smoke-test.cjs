@@ -31,7 +31,7 @@ async function runDesktopChecks(browser) {
     throw new Error("Use-case selection did not update the schema preview.");
   }
 
-  await page.locator('button[aria-label^="04. Patch"]').click();
+  await page.locator('[aria-label^="04. Patch"]').click();
   const phase = await assertText(
     page.locator(".phaseRail__item.is-active .phaseRail__label"),
     "Patch",

@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { CodeIcon, ChevronRightIcon } from "./icons";
-import type { GapRow, UseCase } from "../data/reducto-content";
+import type { GapRow, PayloadCollectionPreview, UseCase } from "../data/reducto-content";
 
 type WorkflowPanelsProps = {
   useCases: readonly UseCase[];
   gapRows: readonly GapRow[];
+  payloadCollectionPreviews: readonly PayloadCollectionPreview[];
   buildPayloadLines: (slug: string) => readonly string[];
   selectedUseCaseId: string;
   onSelectUseCase: (id: string) => void;
@@ -13,6 +14,7 @@ type WorkflowPanelsProps = {
 export function WorkflowPanels({
   useCases,
   gapRows,
+  payloadCollectionPreviews,
   buildPayloadLines,
   selectedUseCaseId,
   onSelectUseCase,
@@ -21,7 +23,13 @@ export function WorkflowPanels({
     return useCases.find((entry) => entry.id === selectedUseCaseId) ?? useCases[0];
   }, [selectedUseCaseId, useCases]);
 
-  const payloadLines = useMemo(() => buildPayloadLines(selectedUseCase.slug), [selectedUseCase.slug, buildPayloadLines]);
+  const selectedPreview = useMemo<PayloadCollectionPreview | undefined>(() => {
+    return payloadCollectionPreviews.find((preview) => preview.slug === selectedUseCase.slug);
+  }, [payloadCollectionPreviews, selectedUseCase.slug]);
+
+  const payloadLines = useMemo(() => {
+    return buildPayloadLines(selectedUseCase.slug);
+  }, [buildPayloadLines, selectedUseCase.slug]);
 
   return (
     <section className="panelGrid" aria-label="Editorial workflow surfaces">
@@ -33,10 +41,10 @@ export function WorkflowPanels({
               Define what your content needs to do, for whom, and in which contexts.
             </p>
           </div>
-          <button className="panelCard__action" type="button">
+          <a className="panelCard__action" href="#docs">
             <span>+</span>
             Add use case
-          </button>
+          </a>
         </div>
 
         <div className="panelList" role="list" aria-label="Use cases">
@@ -74,10 +82,10 @@ export function WorkflowPanels({
               Identify what is missing between current content and use case needs.
             </p>
           </div>
-          <button className="panelCard__action" type="button">
+          <a className="panelCard__action" href="#docs">
             <span>+</span>
             Add gap
-          </button>
+          </a>
         </div>
 
         <div className="gapTable" role="table" aria-label="Gap analysis">
@@ -115,10 +123,45 @@ export function WorkflowPanels({
               Payload-ready content model aligned to your selected use case.
             </p>
           </div>
-          <button className="panelCard__action panelCard__action--icon" type="button" aria-label="Open schema">
+          <a className="panelCard__action panelCard__action--icon" href="#schema" aria-label="Open schema">
             <CodeIcon size={18} />
-          </button>
+          </a>
         </div>
+
+        {selectedPreview ? (
+          <div className="schemaBrief" aria-label={`Payload handoff details for ${selectedPreview.label}`}>
+            <div className="schemaBrief__row">
+              <span>Collection</span>
+              <strong>{selectedPreview.slug}</strong>
+            </div>
+            <div className="schemaBrief__row">
+              <span>Endpoint</span>
+              <strong>{selectedPreview.endpoint}</strong>
+            </div>
+            <div className="schemaBrief__row">
+              <span>Owner</span>
+              <strong>{selectedPreview.ownership}</strong>
+            </div>
+            <div className="schemaBrief__row schemaBrief__row--wide">
+              <span>Workflow</span>
+              <strong>{selectedPreview.workflow}</strong>
+            </div>
+          </div>
+        ) : null}
+
+        {selectedPreview ? (
+          <div className="schemaFields" aria-label={`${selectedPreview.label} fields`}>
+            {selectedPreview.fields.map((field) => (
+              <div className="schemaFields__row" key={`${selectedPreview.slug}-${field.name}`}>
+                <div>
+                  <strong>{field.name}</strong>
+                  <span>{field.note}</span>
+                </div>
+                <span className="schemaFields__type">{field.type}{field.required ? " *" : ""}</span>
+              </div>
+            ))}
+          </div>
+        ) : null}
 
         <div className="codeFrame" aria-label={`Payload model for ${selectedUseCase.title}`}>
           <div className="codeFrame__lines">
@@ -133,7 +176,9 @@ export function WorkflowPanels({
 
         <div className="panelCard__metaRow">
           <span className="panelCard__metaChip">Current focus: {selectedUseCase.title}</span>
-          <span className="panelCard__metaHint">Ready to connect to Payload CMS</span>
+          <span className="panelCard__metaHint">
+            {selectedPreview ? `Relations: ${selectedPreview.relationships.join(", ")}` : "Ready to connect to Payload CMS"}
+          </span>
         </div>
       </article>
     </section>

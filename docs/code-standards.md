@@ -7,6 +7,7 @@
 - Use Next.js App Router for routing, metadata, static rendering, and deployment compatibility with Vercel.
 - Keep client components narrow; add `"use client"` only where browser state or DOM APIs are required.
 - Use `src/data` for typed seed content and future API-shaped adapters.
+- Keep large static seed arrays in dedicated data modules when the adapter would otherwise grow past practical review size.
 - Keep visual tokens in CSS variables.
 - Use warm paper palette only: off-white paper, deep plum, warm beige, magenta action accent.
 - Avoid blue accents, heavy shadows, glass effects, and generic dashboard chrome.
@@ -21,6 +22,8 @@
 ## Payload
 
 - Do not import Payload server code into frontend components.
+- Do not share Payload collection config with `src/data`; map backend responses into frontend-safe DTOs.
+- Keep `src/data/payload-handoff.ts` as handoff metadata only: slugs, endpoints, fields, relationships, ownership, and workflow hints.
 - Add a dedicated API client when the backend is introduced.
 - Preserve the `ReductoContent` adapter shape so Payload can replace local seed data without component rewrites.
 

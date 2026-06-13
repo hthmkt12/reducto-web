@@ -57,10 +57,13 @@
     ],
     "gapRows": [
       { "area": "string", "status": "string", "details": "string" }
-    ]
+    ],
+    "landingSections": "optional frontend landing section DTOs",
+    "payloadCollectionPreviews": "optional frontend-safe Payload handoff DTOs"
   }
   ```
-- **Error Handling**: Non-200 responses or connection errors must cause the frontend to fallback to static content.
+- **Error Handling**: Non-200 responses, connection errors, or invalid required fields must cause the frontend to fallback to static content.
+- **Boundary Rule**: Payload server collection config stays in the backend app. The frontend only accepts API-shaped DTOs and local handoff fixtures.
 
 ## Code Layout
 - `F:\Reducto` (Frontend project root)

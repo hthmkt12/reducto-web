@@ -1,0 +1,117 @@
+.phaseSections {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.phaseSection {
+  scroll-margin-top: 12.25rem;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) minmax(18rem, 0.48fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  min-height: 15rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.phaseSection.is-active {
+  background:
+    linear-gradient(90deg, rgba(157, 23, 160, 0.07), rgba(255, 255, 255, 0.1) 42%),
+    rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(157, 23, 160, 0.11);
+}
+
+.phaseSection__marker {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.2rem;
+  border-right: 1px solid var(--line-soft);
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 4.2vw, 4.6rem);
+  line-height: 0.9;
+  color: var(--ink-muted);
+}
+
+.phaseSection.is-active .phaseSection__marker {
+  color: var(--magenta);
+}
+
+.phaseSection__main {
+  display: grid;
+  align-content: center;
+  gap: 0.85rem;
+  padding: 0.3rem 0;
+}
+
+.phaseSection__kicker,
+.phaseSection__asideLabel {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.phaseSection__title {
+  margin: 0;
+  max-width: 15ch;
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 4vw, 4.35rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.phaseSection__description {
+  margin: 0;
+  max-width: 49rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.phaseSection__aside {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-left: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.phaseSection__artifact {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.phaseSection__checks {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.phaseSection__checks li {
+  position: relative;
+  padding-left: 1.05rem;
+}
+
+.phaseSection__checks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--warm);
+}

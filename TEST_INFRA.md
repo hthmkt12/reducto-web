@@ -70,3 +70,4 @@ To test the frontend API adapter fallback behavior cleanly:
 1. The frontend supports an `apiUrl` query parameter (e.g., `http://localhost:3000/?apiUrl=/api/mock-content`).
 2. Playwright interceptor `page.route('**/api/*', route => route.fulfill(...))` is used in tests to mock backend endpoints.
 3. This allows setting up precise mock scenarios (success, delay, HTTP error status, structural validation errors) directly from the E2E test specs without managing stateful local servers or database connections.
+4. Mock success payloads must include `navItems`, `phases`, `useCases`, and `gapRows`; `landingSections` and `payloadCollectionPreviews` are optional and fall back to frontend-safe static DTOs.
