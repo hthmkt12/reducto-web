@@ -45,16 +45,6 @@ export function ArrowRightIcon(props: IconProps) {
   );
 }
 
-export function MenuIcon(props: IconProps) {
-  return (
-    <Svg {...props}>
-      <path d="M4 7h16" />
-      <path d="M4 12h16" />
-      <path d="M4 17h16" />
-    </Svg>
-  );
-}
-
 export function DocumentIcon(props: IconProps) {
   return (
     <Svg {...props}>

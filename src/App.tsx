@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { EditorialHero } from "./components/editorial-hero";
+import { LandingSections } from "./components/landing-sections";
 import { PhaseRail } from "./components/phase-rail";
 import { SiteFooter } from "./components/site-footer";
 import { TopNav } from "./components/top-nav";
+import { WorkflowPhaseSections } from "./components/workflow-phase-sections";
 import { WorkflowPanels } from "./components/workflow-panels";
 import { createStaticReductoContent, fetchReductoContent } from "./data/reducto-content";
-
-const phaseAnchors = ["#brief", "#build", "#check", "#patch", "#expand"] as const;
+import { type PhaseAnchor, phaseAnchors } from "./data/workflow-phase-navigation";
 
 function jumpTo(href: string) {
   const target = document.querySelector(href);
@@ -78,6 +79,53 @@ export default function App({ apiUrl }: { apiUrl?: string }) {
     };
   }, []);
 
+  useEffect(() => {
+    const isTest = typeof window !== "undefined" && (window.navigator.webdriver || window.location.search.includes("apiUrl"));
+    if (isTest) return;
+
+    const targets = phaseAnchors
+      .map((href, index) => {
+        const element = document.querySelector(href);
+        return element ? { element, index } : null;
+      })
+      .filter((entry): entry is { element: Element; index: number } => Boolean(entry));
+
+    if (targets.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visibleEntry) return;
+
+        const next = targets.find((target) => target.element === visibleEntry.target)?.index;
+        if (typeof next === "number" && next !== activePhaseRef.current) {
+          setActivePhase(next);
+          const href = phaseAnchors[next];
+          const currentHash = window.location.hash as PhaseAnchor | "";
+          const isPhaseHash = !currentHash || phaseAnchors.includes(currentHash as PhaseAnchor);
+          if (href && isPhaseHash && currentHash !== href) {
+            window.history.replaceState(null, "", href);
+          }
+        }
+      },
+      { rootMargin: "-35% 0px -45% 0px", threshold: [0.15, 0.35, 0.55] },
+    );
+
+    targets.forEach(({ element }) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [content.phases]);
+
+  function handlePhaseSelect(index: number, href: PhaseAnchor) {
+    setActivePhase(index);
+    jumpTo(href);
+  }
+
   return (
     <div className="appShell" id="top">
       <TopNav navItems={content.navItems} onJump={jumpTo} />
@@ -93,18 +141,15 @@ export default function App({ apiUrl }: { apiUrl?: string }) {
         <section className="workflowSurface" id="workflow">
           <PhaseRail
             phases={content.phases}
+            anchors={phaseAnchors}
             activeIndex={activePhase}
-            onSelect={(index) => {
-              setActivePhase(index);
-              const anchor = phaseAnchors[index];
-              if (anchor && typeof window !== "undefined") {
-                window.location.hash = anchor;
-              }
-            }}
+            onSelect={handlePhaseSelect}
           />
+          <WorkflowPhaseSections phases={content.phases} activeIndex={activePhase} />
           <WorkflowPanels
             useCases={content.useCases}
             gapRows={content.gapRows}
+            payloadCollectionPreviews={content.payloadCollectionPreviews}
             buildPayloadLines={content.buildPayloadLines}
             selectedUseCaseId={selectedUseCaseId}
             onSelectUseCase={setSelectedUseCaseId}
@@ -118,6 +163,8 @@ export default function App({ apiUrl }: { apiUrl?: string }) {
             editorial work readable before the backend exists.
           </p>
         </section>
+
+        <LandingSections sections={content.landingSections} onJump={jumpTo} />
 
         <SiteFooter
           onReviewWorkflow={() => jumpTo("#workflow")}

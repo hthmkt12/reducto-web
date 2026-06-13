@@ -1,10 +1,26 @@
 @media (max-width: 980px) {
-  .topNav__links {
-    display: none;
+  .topNav__inner {
+    grid-template-columns: auto auto;
+    gap: 0.5rem 1rem;
+    padding: 0.85rem 0 0.75rem;
   }
 
-  .topNav__menu {
-    display: inline-flex;
+  .topNav__links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    gap: 1.1rem;
+    overflow-x: auto;
+    padding-bottom: 0.1rem;
+    white-space: nowrap;
+  }
+
+  .topNav__link {
+    padding: 0.25rem 0 0.45rem;
+  }
+
+  .topNav__actions {
+    justify-content: flex-end;
   }
 
   .heroBand__inner {
@@ -28,8 +44,38 @@
     grid-template-columns: 1fr;
   }
 
+  .phaseRail {
+    position: static;
+  }
+
+  .phaseSection {
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+  }
+
+  .phaseSection__aside {
+    grid-column: 2;
+    border-left: 0;
+    border-top: 1px solid var(--line-soft);
+    padding: 1rem 0 0;
+    background: transparent;
+  }
+
   .panelCard {
     min-height: 18rem;
+  }
+
+  .landingSection {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+  .landingSection__items {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line-soft);
+    border-left: 0;
+  }
+
+  .landingSection__copy {
+    padding-right: 1rem;
   }
 }
 
@@ -68,8 +114,37 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .phaseRail__item {
+    min-height: 5.8rem;
+  }
+
+  .phaseRail__item.is-active .phaseRail__summary {
+    max-height: 5.5rem;
+  }
+
   .phaseRail__arrow {
     display: none;
+  }
+
+  .phaseSection {
+    scroll-margin-top: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .phaseSection__marker {
+    justify-content: flex-start;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 0.65rem;
+  }
+
+  .phaseSection__title {
+    max-width: 12ch;
+  }
+
+  .phaseSection__aside {
+    grid-column: auto;
   }
 
   .panelCard__head {
@@ -87,5 +162,33 @@
 
   .siteFooter__bar {
     flex-direction: column;
+  }
+
+  .landingSection {
+    scroll-margin-top: 8.25rem;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .landingSection__index {
+    justify-content: flex-start;
+    padding: 1rem 1rem 0;
+    border-right: 0;
+  }
+
+  .landingSection__copy {
+    padding: 0.65rem 1rem 1.25rem;
+  }
+
+  .landingSection__summary {
+    max-width: none;
+  }
+
+  .landingSection__items {
+    grid-column: auto;
+  }
+
+  .landingSection__item {
+    min-height: 0;
   }
 }

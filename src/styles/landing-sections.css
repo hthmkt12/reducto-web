@@ -1,0 +1,101 @@
+.landingSections {
+  display: grid;
+  gap: 1rem;
+  padding: 0 0 1.65rem;
+}
+
+.landingSection {
+  scroll-margin-top: 5.5rem;
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 0.84fr) minmax(24rem, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: stretch;
+  min-height: 17rem;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 58%),
+    rgba(255, 255, 255, 0.12);
+}
+
+.landingSection__index {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 1.25rem;
+  border-right: 1px solid var(--line-soft);
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.landingSection__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.35rem 0;
+}
+
+.landingSection__title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 5.6vw, 6.2rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.landingSection__summary {
+  margin: 1rem 0 0;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.landingSection__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.65rem;
+  margin-top: 1.2rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--magenta);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.landingSection__items {
+  display: grid;
+  align-content: stretch;
+  border-left: 1px solid var(--line-soft);
+}
+
+.landingSection__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 5.66rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.landingSection__item:last-child {
+  border-bottom: 0;
+}
+
+.landingSection__item h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.landingSection__item p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}

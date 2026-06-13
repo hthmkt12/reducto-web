@@ -98,16 +98,6 @@
   color: #fff;
 }
 
-.topNav__menu {
-  display: none;
-  width: 2.75rem;
-  height: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
 .pageShell {
   padding: 1.75rem 0 2rem;
 }
