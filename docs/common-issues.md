@@ -181,3 +181,31 @@ Living bugfix memory for Reducto. Before fixing any bug, check this file for mat
 ### Verification
 
 - Run `pnpm run test:int` in `reducto-backend` to verify the integration test suite passes.
+
+## 2026-06-13 - CI Vercel Preview Token Failure
+
+### Symptoms
+
+- GitHub Actions `build-and-smoke` fails at `vercel pull` with `The token provided via --token argument is not valid`.
+- Root `npm run build` passes before the Vercel step.
+
+### Root Cause
+
+- The CI workflow made Vercel preview deployment mandatory for every PR smoke run.
+- An invalid or expired `VERCEL_TOKEN` secret blocked the whole job before smoke tests could run.
+
+### Common Triggers
+
+- Rotating or deleting the Vercel token without updating the GitHub repository secret.
+- Running PR CI before Vercel preview credentials are configured.
+
+### Solutions
+
+- Keep root build mandatory.
+- Make Vercel preview smoke tests run only when `vercel pull` succeeds.
+- Fall back to local `next start` smoke and E2E tests when Vercel auth is unavailable.
+
+### Verification
+
+- Run `npm.cmd run build`.
+- Push the workflow update and confirm the PR CI falls back to local smoke/E2E when Vercel auth fails.
