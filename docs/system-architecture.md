@@ -2,12 +2,12 @@
 
 ## Current System
 
-Reducto is a Next.js App Router app deployed on Vercel. The landing page is statically prerendered, with one small client island for hash-driven phase state, use-case selection, and optional frontend-safe content fetching.
+Reducto is a static Next.js App Router export deployed on Cloudflare Pages. The landing page is prerendered into `out/`, with one small client island for hash-driven phase state, use-case selection, and optional frontend-safe content fetching.
 
 ```mermaid
 flowchart LR
-  User["Browser"] --> Vercel["Vercel edge/CDN"]
-  Vercel --> Next["Next.js App Router"]
+  User["Browser"] --> Pages["Cloudflare Pages"]
+  Pages --> Next["Static Next.js export"]
   Next --> Page["Static / landing page"]
   Page --> Island["Client workflow island"]
   Island --> Adapter["Typed content adapter"]
@@ -46,7 +46,7 @@ Architecture:
 
 ```mermaid
 flowchart LR
-  UI["Next.js frontend (Vercel)"] --> APIFetch["HTTP fetch /api/reducto-content"]
+  UI["Next.js frontend (Cloudflare Pages)"] --> APIFetch["HTTP fetch /api/reducto-content"]
   APIFetch --> Backend["reducto-backend (Cloudflare/localhost)"]
   Backend --> Payload["Payload CMS"]
   Payload --> DB["D1 Database (SQLite)"]
@@ -55,7 +55,7 @@ flowchart LR
 
 Deployment boundary:
 
-- Frontend: this Next.js app, deployed to Vercel.
+- Frontend: this Next.js app, exported statically and deployed to Cloudflare Pages.
 - Backend: separate Payload app, deployed independently (e.g. to Cloudflare).
 - Contract: backend responses map to the existing `ReductoContent` shape, validated at runtime.
 - Rule: do not import Payload server packages, collection config, or CMS server helpers into frontend components or `src/data`.

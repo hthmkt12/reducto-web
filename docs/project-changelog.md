@@ -3,11 +3,15 @@
 ## 2026-06-13
 
 ### Added
+- Added Cloudflare Pages deployment scripts for the frontend static export.
 - Added an API contract smoke test script `test:smoke:content` to the backend to validate `/api/reducto-content` JSON schema and phase/use-case bounds.
 - Added a frontend-to-backend integration switch using `REDUCTO_CONTENT_API_URL` with a static fallback on fetch/validation failures.
 - Documented local backend run commands, environment variable usage, and smoke testing in README files.
 
 ### Changed
+- Migrated the frontend deployment target from Vercel to Cloudflare Pages static export.
+- Updated CI to verify the built `out/` artifact through Cloudflare Pages local dev and deploy to Cloudflare Pages from `main` when Cloudflare secrets are present.
+- Added `NEXT_PUBLIC_REDUCTO_CONTENT_API_URL` support for frontend-safe static deployments.
 - Configured backend ESLint and Vitest integration test environments to optimize type checking and test performance.
 
 ## 2026-06-10

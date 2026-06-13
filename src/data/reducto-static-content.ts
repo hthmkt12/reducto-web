@@ -177,7 +177,7 @@ export const landingSections = [
     items: [
       {
         label: "Starter",
-        detail: "Static workflow page, typed seed content, and Vercel-ready build.",
+        detail: "Static workflow page, typed seed content, and Cloudflare-ready build.",
       },
       {
         label: "Team",

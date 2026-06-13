@@ -12,7 +12,7 @@ Status: Complete.
 - Replaced generic Payload placeholder with collection-specific handoff previews.
 - Added frontend-safe Payload DTO fixtures for documents, policies, audits, clauses, and comparisons.
 - Verified desktop and mobile rendering.
-- Deployed to Vercel.
+- Deployed to Cloudflare Pages.
 
 ## Phase 1: Payload Backend
 
@@ -26,11 +26,11 @@ Status: Complete (Verified on localhost).
 
 ## Phase 1A: Repository And CI
 
-Status: Ready for remote.
+Status: Cloudflare-ready.
 
 - Local git checkpoint should be created before backend work begins.
-- GitHub remote should be added when the repository destination is chosen.
-- CI workflow is prepared for build and smoke verification.
+- GitHub remote is configured.
+- CI workflow builds the static export, verifies the Cloudflare Pages artifact locally, and deploys to Cloudflare Pages from `main` when Cloudflare secrets are configured.
 
 ## Phase 2: Workflow Persistence
 

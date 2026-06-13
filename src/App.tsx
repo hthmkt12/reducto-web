@@ -38,7 +38,8 @@ export default function App({ apiUrl }: { apiUrl?: string }) {
       const params = new URLSearchParams(window.location.search);
       queryApiUrl = params.get("apiUrl") || "";
     }
-    const finalApiUrl = apiUrl || queryApiUrl || process.env.REDUCTO_CONTENT_API_URL || "";
+    const finalApiUrl =
+      apiUrl || queryApiUrl || process.env.NEXT_PUBLIC_REDUCTO_CONTENT_API_URL || "";
     if (!finalApiUrl) return;
 
     let active = true;
